@@ -3,9 +3,9 @@ name: Android CI/CD Pipeline
 # 設定觸發條件：當 main 分支有 push 或 pull_request 時執行
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
