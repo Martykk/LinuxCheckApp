@@ -1,0 +1,39 @@
+name: Android CI/CD Pipeline
+
+# 設定觸發條件：當 main 分支有 push 或 pull_request 時執行
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # 使用 GitHub 提供的 Linux 虛擬機 (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 檢查程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Java 環境 (Android 需要 JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: 給予 Gradle 執行權限 (Linux 必備步驟)
+        run: chmod +x gradlew
+
+      - name: 執行單元測試 (Unit Test)
+        run: ./gradlew test
+
+      - name: 編譯 APK (Debug)
+        run: ./gradlew assembleDebug
+
+      - name: 上傳編譯好的 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
