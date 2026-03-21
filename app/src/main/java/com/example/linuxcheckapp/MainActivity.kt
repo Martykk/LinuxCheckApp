@@ -39,7 +39,7 @@ fun ServerMonitorScreen() {
     val scope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -64,6 +64,7 @@ fun ServerMonitorScreen() {
                         statusText = "連線成功！\n" +
                                 "型號: ${data?.model}\n" +
                                 "CPU 負載: ${data?.cpu_load}%\n" +
+                                "記憶體使用率: ${data?.memory_usage}%\n" +
                                 "伺服器狀態: ${data?.status}"
                     } else {
                         statusText = "伺服器錯誤: ${response.code()}"

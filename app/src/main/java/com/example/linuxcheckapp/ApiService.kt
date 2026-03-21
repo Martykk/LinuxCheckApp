@@ -13,5 +13,6 @@ interface ApiService {
 data class ServerStatus(
     val model: String,      // 對應 "model"
     val cpu_load: Int,      // 對應 "cpu_load"
+    val memory_usage: Double, // 對應 Python 的 memory_info.percent
     val status: String      // 對應 "status"
 )
