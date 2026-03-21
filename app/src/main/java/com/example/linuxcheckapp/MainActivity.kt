@@ -8,7 +8,8 @@ import androidx.compose.ui.tooling.preview.Preview
 // --- 佈局相關 ---
 import androidx.compose.foundation.layout.* // --- Material3 UI 元件 ---
 import androidx.compose.material3.* // --- 狀態管理與生命週期 ---
-import androidx.compose.runtime.* import androidx.compose.ui.Alignment
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 // --- 協程 (背景執行網路請求必備) ---
@@ -59,13 +60,17 @@ fun ServerMonitorScreen() {
 
                     if (response.isSuccessful) {
                         val data = response.body()
-                        statusText = "連線成功！\n型號: ${data?.model}\nCPU 負載: ${data?.cpu_load}%"
+                        // 修正點：確保變數名稱與 Data Class 一致，並加上 status 顯示
+                        statusText = "連線成功！\n" +
+                                "型號: ${data?.model}\n" +
+                                "CPU 負載: ${data?.cpu_load}%\n" +
+                                "伺服器狀態: ${data?.status}"
                     } else {
                         statusText = "伺服器錯誤: ${response.code()}"
                     }
                 } catch (e: Exception) {
                     // 處理網路斷線或 IP 錯誤
-                    statusText = "連線失敗: ${e.message}"
+                    statusText = "連線失敗1: ${e.message}"
                 }
             }
         }) {
