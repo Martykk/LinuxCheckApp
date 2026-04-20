@@ -40,8 +40,13 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # 等 Android 編譯完才跑這個
+    needs: build
     steps:
+      - name: 連線 Tailscale VPN
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
       - name: 遠端執行部署指令
         uses: appleboy/ssh-action@v1.2.0
         with:
