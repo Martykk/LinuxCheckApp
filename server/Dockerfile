@@ -15,4 +15,4 @@ COPY server.py .
 EXPOSE 8000
 
 # 啟動指令：讓 Server 監聽所有 IP (0.0.0.0)
-CMD ["uvicorn", "server.py:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH Key
           script: |
             cd /home/one/LinuxCheckApp/server
-            git pull origin master
+            git pull origin backend
             docker build -t linux-check-app .
             docker stop linux-check-app || true
             docker rm linux-check-app || true
